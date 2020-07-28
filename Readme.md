@@ -11,6 +11,7 @@ etc
 ---
 - Актуальность модулей npm -- https://www.npmtrends.com/apollo-client-vs-graphql-tag-vs-graphql-tools-vs-graphql.js-vs-react-relay-vs-relay-runtime
 - Chrome CSS summit -- https://www.youtube.com/watch?v=-oyeaIirVC0 (https://css-at-cds.netlify.app/)
+- Layout issues -- https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
 
 
 Интерфейс

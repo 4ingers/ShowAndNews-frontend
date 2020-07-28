@@ -49,20 +49,18 @@ module.exports = {
 
 
     
-    return query.then(data => {
+    return query.then(
+      data => 
       //// TODO: === FOR TAGS!!! ===
-      // if (category_id) {
+      // if (/* query param */ tag_id) {
       //   return data.filter(post =>
-      //     post.cat_ids
+      //     post.tags_ids
       //       .split(',')
-      //       .includes(category_id.toString())
+      //       .includes(tag_id.toString())
       //   )
       // }
-      if (category_id) {
-        return data.filter(post => post.cat_id === category_id)
-      }
-      return data
-    }).catch(errorHandler)
+        category_id ? data.filter(post => post.cat_id === category_id) : data
+    ).catch(errorHandler)
   },
 
   getPostsAuthors: async(ids) => 
