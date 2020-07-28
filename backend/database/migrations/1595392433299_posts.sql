@@ -1,0 +1,38 @@
+CREATE TABLE IF NOT EXISTS {}.posts (
+  id INT(12) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  
+  author_id INT(12) NOT NULL,
+  editor_id INT(12) NOT NULL,
+
+  title VARCHAR(100) NOT NULL,
+  description VARCHAR(200) NOT NULL,
+  text TEXT NOT NULL,
+  -- keyword1 VARCHAR(50) NOT NULL,
+  -- keyword2 VARCHAR(50) NOT NULL,
+  -- keyword3 VARCHAR(50) NOT NULL,
+  -- keyword4 VARCHAR(50) NOT NULL,
+  -- keyword5 VARCHAR(50) NOT NULL,
+  image VARCHAR(400) NOT NULL,
+  active TINYINT(1) NOT NULL DEFAULT 0,
+  updated TINYINT(1) NOT NULL DEFAULT 0,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  path VARCHAR(400) NOT NULL,
+
+
+  FULLTEXT (title, description),
+
+  INDEX pauthor_ind(author_id),
+  UNIQUE (path),
+
+  CONSTRAINT fk_pauthor FOREIGN KEY(author_id)
+    REFERENCES users(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+
+  CONSTRAINT fk_peditor FOREIGN KEY(editor_id)
+    REFERENCES users(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+) 
+ENGINE=InnoDB;

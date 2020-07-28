@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend for Show&News Application",
+  "main": "app.js",
+  "scripts": {
+    "test": "test",
+    "migration:create": "node ./database/actions/create-migration.js",
+    "migration:run": "node ./database/actions/run-migration.js"
+  },
+  "author": "Aleksandr Vodyakov <4ingers@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-koa": "^2.16.1",
+    "bluebird": "^3.7.2",
+    "dotenv": "^8.2.0",
+    "graphql-iso-date": "^3.6.1",
+    "graphql-tools": "^6.0.15",
+    "knex": "^0.21.2",
+    "koa": "^2.13.0",
+    "mysql2": "^2.1.0"
+  }
+}
