@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/lib/*": ["lib/*"],
+      "@/pages/*": ["pages/*"],
+      "@/public/*": ["public/*"],
+      "@/services/*": ["services/*"],
+      "@/styles/*": ["styles/*"],
+
+      "!logo": ["components/Logo/Logo.js"]
+    }
+  }
+}

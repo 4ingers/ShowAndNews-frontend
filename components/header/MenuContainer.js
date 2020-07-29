@@ -1,26 +1,22 @@
-import React, { useState, Fragment } from 'react';
-import { Link } from 'react-router-dom';
-
-import navicon from '../../assets/images/navicon.png';
-
-// import { OutsideAlerter } from '../hooks/click-outside'
+import { useState } from 'react';
+import { Link } from 'next/link';
 
 
-const navLinks = [
+const navigationMenuItems = [
   { 
-    title: 'ЗВЁЗДЫ',
+    title: 'Звёзды',
     path: '/blog'
   },
   {
-    title: 'КИНО',
+    title: 'Кино',
     path: '/about'
   },
   {
-    title: 'МОДА',
-    path: '/contact-us'
+    title: 'Мода',
+    path: '/contact'
   },
   {
-    title: 'БЛОГЕРЫ',
+    title: 'Блогеры',
     path: '/home'
   },
 ]
@@ -31,9 +27,9 @@ export default function MenuContainer() {
   const menuContainer = (
     <div className={`menu-container${menuActive ? ' active' : ''}`}>
         <ul className="menu-list">
-          {navLinks.map((link, index) => (
+          {navigationMenuItems.map((link, index) => (
               <li className="menu-item" key={index}>
-                <Link className="menu-item-link" to={link.path}>{link.title}</Link>
+                <Link className="menu-item-link" href={link.path}><a>{link.title}</a></Link>
               </li>
           ))}
         </ul>  
@@ -41,10 +37,10 @@ export default function MenuContainer() {
   );
 
   return (
-    <Fragment>
+    <>
       {menuContainer}
       {/* {menuActive ? <OutsideAlerter callback={() => setMenuActive(!menuActive)}>{component}</OutsideAlerter> : component} */}
-      <img src={navicon} alt="navicon" className="navicon" onClick={() => { setMenuActive(!menuActive) }} />
-    </Fragment>
+      <img src="/images/mobile-navigation-menu-icon.png" alt="navicon" className="navicon" onClick={() => { setMenuActive(!menuActive) }} />
+    </>
   );
 }

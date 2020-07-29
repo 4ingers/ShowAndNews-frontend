@@ -1,3 +1,12 @@
-import App from 'next/app'
+import '@/styles/base.scss'
 
-export default App
+
+const NewsApp = ({Component, pageProps}) => {
+  return (
+    <>
+      <Component {...pageProps} />
+    </>
+  )
+}
+
+export default NewsApp

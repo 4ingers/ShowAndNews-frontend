@@ -1,15 +1,14 @@
 import React from 'react'
-import Moment from 'react-moment';
-import 'moment/locale/ru'
 
 import {TagRow} from '../../common'
 
 export default function MasonryPost ({post, tagsOnTop}) {
 
-  const windowWidth = window.innerWidth
-  const imageBackground = { backgroundImage: `url("${require(`../../../assets/images/${post.image}`)}")` };
+  // const windowWidth = window.innerWidth
+  // const imageBackground = { backgroundImage: `url("${require(`../../../assets/images/${post.image}`)}")` };
 
-  const style = windowWidth > 900 ? {...imageBackground, ...post.style} : imageBackground
+  // const style = windowWidth > 900 ? {...imageBackground, ...post.style} : imageBackground
+  const style = {...post.style}
 
   return (
     <a className="masonry-post overlay" style={style} href={post.path}>
@@ -17,7 +16,7 @@ export default function MasonryPost ({post, tagsOnTop}) {
         <TagRow tags={post.tags} />
         <div> 
           <h2 className="image-title">{post.title}</h2>
-          <Moment className="image-date" locale='ru' fromNow>{post.datetime}</Moment>
+          <span className="image-date">{new Date(post.datetime).toUTCString()}</span>
         </div>
       </div>
     </a>
