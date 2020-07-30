@@ -9,8 +9,6 @@
       "@/public/*": ["public/*"],
       "@/services/*": ["services/*"],
       "@/styles/*": ["styles/*"],
-
-      "!logo": ["components/Logo/Logo.js"]
     }
   }
 }

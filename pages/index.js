@@ -1,15 +1,24 @@
-import React from 'react'
 import withApollo from '../lib/apollo'
 import Head from 'next/head'
 import Link from 'next/link'
 
-import CategoryBody from '../components/body/CategoryBody'
+import MainLayout from '@/components/layouts/MainLayout'
 
 
+const IndexPage = () => {
+  const meta = {
+    title: 'a',
+    keywords: [
+      'a'
+    ],
+    description: 'a'
+  }
 
-const Index = ({categoryId}) => 
-  <CategoryBody 
-    category_id={1} />
+  return (
+    <MainLayout meta={meta}>
+      
+    </MainLayout >
+  )
+}
 
-
-export default withApollo({ ssr: true })(Index)
+export default withApollo({ ssr: true })(IndexPage)

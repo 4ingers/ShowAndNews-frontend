@@ -1,10 +1,12 @@
-module.exports = {
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    config.module.rules.push({
-      test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-      loader: require.resolve("url-loader")
-    });
+const path = require('path')
 
-    return config;
+module.exports = {
+  // loaderOptions: {
+  //   scss: {
+  //     prependData: `@import "@/styles/_variables.scss";`
+  //   }
+  // },
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')]
   }
-};
+}

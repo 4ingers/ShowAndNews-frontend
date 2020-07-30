@@ -1,0 +1,27 @@
+@import 'variables.scss';
+
+.logoTitle {
+  font-size: 48px;
+  color: $showandnews-darkgrey;
+  font-family: $logo-font;
+
+  display: inline;
+  text-align: center;
+
+  margin: 0 auto auto auto;
+  padding: 0;
+
+  text-decoration: none;
+}
+
+@media screen and (max-width: 900px) {
+  .logoTitle {
+    display: block;
+    float: right;
+
+    margin: auto 0;
+    margin-right: $navigation-height-mobile / 3;
+
+    font-size: 6vw;
+  }
+}

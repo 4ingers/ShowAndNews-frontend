@@ -1,7 +1,9 @@
-import MasonryPost from './MasonryPost'
-import TagRow from './TagRow'
-
-export {
-  MasonryPost,
-  TagRow
+const Post = () => {
+  return (
+    <>
+      <h1>Post template</h1>
+    </>
+  )
 }
+
+export default Post

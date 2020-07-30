@@ -1,0 +1,1 @@
+{"ast":null,"code":"import Logo from './Logo';\nexport default Logo;","map":{"version":3,"sources":["D:/Site/showandnews/components/logo/index.js"],"names":["Logo"],"mappings":"AAAA,OAAOA,IAAP,MAAiB,QAAjB;AAEA,eAAeA,IAAf","sourcesContent":["import Logo from './Logo'\r\n\r\nexport default Logo"]},"metadata":{},"sourceType":"module"}
