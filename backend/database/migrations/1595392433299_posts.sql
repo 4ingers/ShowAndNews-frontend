@@ -17,13 +17,15 @@ CREATE TABLE IF NOT EXISTS {}.posts (
   updated TINYINT(1) NOT NULL DEFAULT 0,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  path VARCHAR(400) NOT NULL,
+  slug VARCHAR(400) NOT NULL,
 
 
-  FULLTEXT (title, description),
+  FULLTEXT user_search(title, description),
+  FULLTEXT slug_search(slug),
 
   INDEX pauthor_ind(author_id),
-  UNIQUE (path),
+
+  UNIQUE (slug),
 
   CONSTRAINT fk_pauthor FOREIGN KEY(author_id)
     REFERENCES users(id)

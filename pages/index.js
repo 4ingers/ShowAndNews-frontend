@@ -1,8 +1,8 @@
-import withApollo from '../lib/apollo'
+// import withApollo from '../lib/withApollo'
 import Head from 'next/head'
 import Link from 'next/link'
 
-import MainLayout from '@/components/layouts/MainLayout'
+import MainLayout from '@/components/MainLayout'
 
 
 const IndexPage = () => {
@@ -21,4 +21,5 @@ const IndexPage = () => {
   )
 }
 
-export default withApollo({ ssr: true })(IndexPage)
+// export default withApollo({ ssr: true })(IndexPage)
+export default IndexPage

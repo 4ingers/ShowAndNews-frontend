@@ -4,7 +4,9 @@ export default class NewsDocument extends Document {
   render() {
     return (
       <Html lang="ru">
-        <Head />
+        <Head>
+          <meta charSet="utf-8" />
+        </Head>
         <body>
           <Main />
           <NextScript />

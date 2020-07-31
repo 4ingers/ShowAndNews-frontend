@@ -24,14 +24,14 @@ VALUES
 ('Tag3'),
 ('Tag4');
 
-INSERT INTO categories(name, description)
+INSERT INTO categories(name, description, slug)
 VALUES
-('Звёзды', 'Описание категории для звёзд'),
-('Кино', 'Тут что-то про кинематограф'),
-('Мода', 'Модная шляпа'),
-('Блогеры', 'Куда нам без тиктока..');
+('Звёзды', 'Описание категории для звёзд', 'stars'),
+('Кино', 'Тут что-то про кинематограф', 'cinema'),
+('Мода', 'Модная шляпа', 'fashion'),
+('Блогеры', 'Куда нам без тиктока..', 'bloggers');
 
-INSERT INTO posts(author_id, editor_id, title, description, text, image, active, path)
+INSERT INTO posts(author_id, editor_id, title, description, text, image, active, slug)
 VALUES
 (
   1,

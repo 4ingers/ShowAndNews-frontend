@@ -1,6 +1,6 @@
-const getFilenameFromPath = (path, withExtension = false) => {
+const getFilenameFromPath = (path, extension = false) => {
   const regex = /(^.*[\\\/])(.+?)(\.[^.]*$|$)/
-  const name = path.replace(regex, withExtension ? ' $2$3' : ' $2 ')
+  const name = path.replace(regex, extension ? ' $2$3' : ' $2 ')
   return name
 }
 

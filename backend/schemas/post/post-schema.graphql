@@ -1,0 +1,19 @@
+scalar DateTime
+
+type Query {
+  getPostsByType(type: String): [Post]!
+  getPostsByCategory(slug: String): [Post]!
+}
+
+type Post {
+  id: Int
+  title: String
+  description: String
+  category: String
+  author: String
+  tags: [String]!
+  created_at: DateTime
+  updated_at: DateTime
+  image: String
+  slug: String
+}
