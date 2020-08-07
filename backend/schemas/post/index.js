@@ -3,17 +3,18 @@ const path = require('path')
 const { GraphQLDateTime } = require('graphql-iso-date')
 
 const PostService = require('../../api/post')
-const {errorHandler} = '../../api/utils'
+const { errorHandler } = '../../api/utils'
 
-const getPostsWithAuthors = cb => 
-  async(parent, args, ctx, info) => {
+
+const getPostsWithAuthors = cb => {
+  return async (parent, args, ctx, info) => {
     const posts = await cb(args, parent)
       .catch(errorHandler)
 
     if (!posts.length) return []
 
     const authors = await PostService.getPostsAuthors(
-      [...new Set(posts.map(({author_id}) => author_id))]
+      [...new Set(posts.map(({ author_id }) => author_id))]
     )
 
     const authorMap = authors.reduce((map, author) => {
@@ -21,24 +22,51 @@ const getPostsWithAuthors = cb =>
       return map
     }, {})
 
-    return posts.map(({cat_name, tags_names, author_id, ...rest}, index) => ({
-      tags: tags_names.split(','),
+    return posts.map(({ cat_name, tags_names, author_id, ...rest }, index) => ({
+      tags: tags_names ? tags_names.split(',') : [],
       author: authorMap[author_id],
       category: cat_name,
       ...rest
     }))
   }
+}
+
+const getPost = cb => {
+  return async (parent, args, ctx, info) => {
+    const post = await cb(args, parent)
+      .catch(errorHandler)
+
+    if (!post) return null
+
+    const { cat_name, tags_names, author_id, ...rest } = post
+
+    return {
+      tags: tags_names ? tags_names.split(',') : [],
+      author: author_id,
+      category: cat_name,
+      ...rest
+    }
+  }
+}
+
 
 module.exports = {
   resolvers: {
     DateTime: GraphQLDateTime,
     Query: {
-      getPostsByType: getPostsWithAuthors(
-        async ({type}) => await PostService.getPosts(type)
+      getPostCount: (_, __, ___, ____) => PostService.getPostCount(),
+      getPostBySlug: getPost(
+        async ({ postSlug }) => await PostService.getPostBySlug(postSlug)
       ),
       getPostsByCategory: getPostsWithAuthors(
-        async({slug}) => await PostService.getPosts('default', slug)
-      )      
+        async ({ catSlug, offset, limit }) => await PostService.getPostsByCategory(catSlug, offset, limit)
+      ),
+      getPostsByTag: getPostsWithAuthors(
+        async ({ tagSlug, offset, limit }) => await PostService.getPostsByTag(tagSlug, offset, limit)
+      ),
+      getPostsByType: getPostsWithAuthors(
+        async ({ type, limit }) => await PostService.getPostsByType(type, limit)
+      ),
     }
   },
   schema: fs.readFileSync(

@@ -1,28 +1,36 @@
-@font-face {
-  font-family: 'Playfair Display Black';
-  src: url('/fonts/PlayfairDisplay-Black.ttf') format('truetype');
-}
+@import "fonts";
 
+// Golden ratio
+$phi: 1.6180339887498948482;
+$small-angle: 360 / ($phi + 1); // 137.5
+$large-angle: 360 - $small-angle; // 222.5
+
+// Colors
 $showandnews-golden: rgb(183, 150, 79);
 $showandnews-burgundy: rgb(144, 26, 45);
 $showandnews-darkgrey: #444;
 
+$bg: #f8f9fa;
+$border: #ccc;
+$border-gradient: linear-gradient(
+    90deg,
+    transparent,
+    $showandnews-golden,
+    transparent
+  )
+  1 0%;
+
 $text-link: #2997ff;
 $text-color: $showandnews-darkgrey;
-$text-light: #999;
+$text-light: rgb(189, 189, 189);
 
-$logo-background-color: $showandnews-golden;
-$logo-font: 'Playfair Display Black';
+$nav-menu-item-color: $showandnews-burgundy;
+$nav-menu-item-color-hover: $showandnews-golden;
 
-$navigation-height: 150px;
-$navigation-height-mobile: 80px;
+// Block element sizes
+// TODO: Check guidelines
+$nav-block-size: 150px;
+$nav-block-size-mobile: 80px;
+$nav-border-inline-size: 1px;
 
-$navigation-gradient-border-size: 1px;
-
-$navigation-menu-width-mobile: 240px;
-
-$background: #f8f9fa;
-$border: #ccc;
-
-$menu-item-color: $showandnews-burgundy;
-$menu-item-color-hover: $showandnews-golden;
+$footer-block-size: 80px;

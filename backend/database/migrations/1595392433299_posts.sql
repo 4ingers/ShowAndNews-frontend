@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS {}.posts (
 
   title VARCHAR(100) NOT NULL,
   description VARCHAR(200) NOT NULL,
-  text TEXT NOT NULL,
+  content TEXT NOT NULL,
   -- keyword1 VARCHAR(50) NOT NULL,
   -- keyword2 VARCHAR(50) NOT NULL,
   -- keyword3 VARCHAR(50) NOT NULL,

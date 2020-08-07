@@ -1,13 +1,10 @@
-// import withApollo from '@/lib/withApollo'
 import { useRouter } from 'next/router'
 
-import MainLayout from '@/components/MainLayout'
-import Category from '@/components/Category'
+import MainLayout from '@/components/layouts/MainLayout'
+import CategoryLayout from '@/components/layouts/pages/CategoryLayout'
 
 
 const CategoryPage = () => {
-  const router = useRouter()
-
   const meta = {
     title: 'a',
     keywords: [
@@ -16,14 +13,13 @@ const CategoryPage = () => {
     description: 'a'
   }
 
-  const { query: { slug } } = router
+  const { query: { slug } } = useRouter()
 
   return (
     <MainLayout meta={meta}>
-      <Category slug={slug} />
+      <CategoryLayout slug={slug} />
     </MainLayout >
   )
 }
 
-// export default withApollo({ ssr: true })(CategoryPage)
 export default CategoryPage

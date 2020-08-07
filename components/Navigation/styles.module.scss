@@ -1,63 +1,54 @@
 @import "variables.scss";
 
-.navigation {
-  height: $navigation-height;
-  width: 100%;
+.pageNavigation {
+  block-size: $nav-block-size;
+  inline-size: 100%;
   background-color: white;
-  color: $text-color;
 
   display: flex;
   flex-direction: column;
-  align-content: center;
   justify-content: space-between;
+  align-items: center;
+
+  padding-block-end: 12px;
 
   position: fixed;
-  z-index: 100;
-  top: 0;
 
-  // -= Gradient border =-
-  border-top: 0;
-  border-bottom: $navigation-gradient-border-size transparent;
-  border-style: solid none;
-  border-image: linear-gradient(
-    to right,
-    transparent,
-    $showandnews-golden,
-    transparent
-  );
-  border-image-slice: 1;
+  // ! inset-block-start doesn't work
+  top: 0px;
+  z-index: 1000;
+
+  border-block-end: $nav-border-inline-size solid;
+  border-image: $border-gradient;
+
+  .logo {
+    // TODO: Относительный/адаптивный
+    font-size: 48px;
+  }
 
   .topStripe {
-    flex-direction: column;
-    width: 360px;
-    height: 24px;
+    display: flex;
+    justify-content: center;
+
+    inline-size: 360px;
+    block-size: 24px;
 
     font-size: 16px;
-    background-color: $logo-background-color;
+    background-color: $showandnews-golden;
     color: white;
-
-    margin: 0 auto 12px auto;
-
-    display: flex;
-    text-align: center;
   }
 
   .navIcon {
-    font-size: 36px;
-    align-items: center;
-    cursor: pointer;
     display: none;
   }
 
   .menuContainer {
     display: flex;
-    align-items: center;
     justify-content: center;
   }
 
   .menuList {
-    margin-block-start: 0;
-    margin-block-end: 12px;
+    margin: 0;
     padding-inline-start: 0;
     display: flex;
     justify-content: center;
@@ -70,19 +61,19 @@
         text-decoration: none;
         padding: 0 10px 0 10px;
         font-size: 16px;
-        color: $menu-item-color;
+        color: $nav-menu-item-color;
 
         &:hover {
           transition: ease 300ms;
-          color: $menu-item-color-hover;
+          color: $nav-menu-item-color-hover;
         }
       }
 
       &:not(:last-of-type):after {
         content: "|";
-        color: $menu-item-color;
+        color: $nav-menu-item-color;
         position: relative;
-        top: -3px;
+        inset-block-start: -3px;
         font-size: 80%;
       }
     }
@@ -90,29 +81,46 @@
 }
 
 @media screen and (max-width: 900px) {
-  .navigation {
-    height: $navigation-height-mobile;
+  .pageNavigation {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding-block-end: 0;
+    padding-inline-start: 20px;
+    padding-inline-end: 20px;
+
+    // ! inset-block-start doesn't work
+    top: 0px;
+
+    block-size: $nav-block-size-mobile;
     flex-direction: row-reverse;
 
-    %menu-container {
-      width: $navigation-menu-width-mobile;
-      height: calc(
-        100% - #{$navigation-height-mobile} - #{$navigation-gradient-border-size}
-      );
-      background-color: white;
-      position: fixed;
-      top: $navigation-height-mobile + 1px;
-      transition: 300ms ease left;
-      align-items: flex-start;
-      justify-content: start;
+    //* Golden ratio inline size
+    $inlineSize: 100% - 100% / $phi;
+
+    .logo {
+      // TODO: Относительный/адаптивный
+      font-size: 24px;
+
+      display: flex;
+      text-align: center;
+      margin-block-end: 2px;
     }
 
     .menuContainer {
-      @extend %menu-container;
-      left: -$navigation-menu-width-mobile;
+      inline-size: $inlineSize;
+      block-size: calc(
+        100% - #{$nav-block-size-mobile} - #{$nav-border-inline-size}
+      );
+      background-color: white;
+      position: fixed;
+      top: $nav-block-size-mobile;
+      transition: 300ms ease left;
+      align-items: flex-start;
+      justify-content: start;
+      left: -$inlineSize;
 
-      &Active {
-        @extend %menu-container; 
+      &.active {
         left: 0px;
       }
     }
@@ -137,11 +145,14 @@
     }
 
     .navIcon {
-      height: $navigation-height-mobile / 2;
       display: block;
-      margin: auto 0;
-      margin-left: $navigation-height-mobile / 4;
-      float: left;
+      cursor: pointer;
+      block-size: 50%;
+      filter: contrast(50%);
     }
+  }
+
+  .logoTitle {
+    margin-block-end: 10px;
   }
 }

@@ -1,73 +1,48 @@
-import { useState, useMemo } from 'react'
-import { Link } from 'next/link'
+import classnames from 'classnames'
+import Link from 'next/link'
 
-// Get rid of it
-import { Pagination } from 'antd'
-import { TagRow } from '@/components/feed/PostsMasonry/MasonryPost/TagRow'
+import styles from './styles.module.scss'
+import TagRow from '@/components/feed/TagRow'
 
 
-const PostGrid = ({ posts }) => {
-  const [pageSize, setPageSize] = useState(9)
-  const [current, setCurrent] = useState(1);
-
-  const paginatedPosts = useMemo(() => {
-    const lastIndex = current * pageSize
-    const firstIndex = lastIndex - pageSize
-
-    return posts.slice(firstIndex, lastIndex)
-  }, [current, pageSize, posts])
-
-  // useEffect(() => {
-  //   window.scroll({
-  //     top: 500,
-  //     left: 0,
-  //     behavior: 'smooth'
-  //   })
-  // }, [current, pageSize]);
-
+const PostsGrid = ({ posts }) => {
   return (
-    <section className="grid-pagination-container">
-      <section className="post-grid container">
-        {paginatedPosts.map((post, index) => (
-          <div className="post-container" key={index}>
+    <section className={styles.gridPaginationContainer}>
+      <section className={classnames(styles.postGrid, styles.container)}>
+        {posts.map((post, index) => (
+          <div className={styles.postContainer} key={index}>
             <figure>
-              {/* Тут не post.slug, а путь до статьи */}
-              <Link href={post.slug}>
+              <Link href={`/post/${post.slug}`} >
                 <a>
-                  <img src={url(`/images/${post.image}`)} alt={post.image} />
+                  <img src={`/images/${post.image}`} alt={post.image} />
                 </a>
               </Link>
             </figure>
-            <TagRow tags={post.categories} />
-            <h2>{post.title}</h2>
-            <p className="author-text">
+
+            <TagRow tags={post.tags} />
+
+            <h2>
+              {post.title}
+            </h2>
+
+            <p className={styles.authorText}>
               <span>
-                {post.date}
+                {post.created_at}
               </span>
             </p>
-            <p className="description-text">
+
+            <p className={styles.descriptionText}>
               {post.description}
             </p>
-            {/* Тут не post.slug, а ??? */}
-            <Link href={post.slug}>
-              <a>
-                Read more...
-            </a>
+
+            <Link href={`post/${post.slug}`}>
+              <a>Подробнее</a>
             </Link>
           </div>
         ))}
       </section>
-      <Pagination
-        simple
-        showSizeChanger
-        onShowSizeChange={setPageSize}
-        pageSize={pageSize}
-        total={posts.length}
-        defaultCurrent={current}
-        onChange={setCurrent}
-      />
     </section>
   )
 }
 
-export default PostGrid
+export default PostsGrid

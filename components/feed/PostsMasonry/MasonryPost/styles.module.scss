@@ -1,16 +1,69 @@
-.overlay:before {
-  z-index: 1;
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    transparent 18%,
-    rgba(0, 0, 0, 0.8) 99%,
-    rgba(0, 0, 0, 0.8) 100%
-  );
+@import 'variables.scss';
+
+.masonryPost {
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center center;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  margin: 0 auto;
+  min-height: 225px;
+
+  &Overlay:before {
+    z-index: 1;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent 18%,
+      rgba(0, 0, 0, 0.8) 99%,
+      rgba(0, 0, 0, 0.8) 100%
+    );
+  }
+
+  .imageText {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .imageTitle, .imageDate, .tagsContainer, div {
+    float: left;
+    width: 100%;
+    z-index: 10;
+    font-weight: 300;
+  }
+  
+  .imageTitle {
+    font-size: 20px;
+    margin-block-start: 0px;
+    margin-block-end: 10px;
+    color: white;
+  }
+
+  .imageDate {
+    font-size: 18px;
+    color: $text-light;
+  }
 }
+
+@media screen and (max-width: 900px) {
+  .masonryPost {
+    width: 100%;
+    margin: 10px 0;
+    height: 300px;
+  }
+}
+
+

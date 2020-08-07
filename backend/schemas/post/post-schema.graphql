@@ -1,14 +1,18 @@
 scalar DateTime
 
 type Query {
-  getPostsByType(type: String): [Post]!
-  getPostsByCategory(slug: String): [Post]!
+  getPostCount: Int!
+  getPostBySlug(postSlug: String): Post
+  getPostsByCategory(catSlug: String, offset: Int, limit: Int): [Post]!
+  getPostsByTag(tagSlug: String, offset: Int, limit: Int): [Post]!
+  getPostsByType(type: String, limit: Int): [Post]!
 }
 
 type Post {
   id: Int
   title: String
   description: String
+  content: String
   category: String
   author: String
   tags: [String]!

@@ -1,8 +1,5 @@
-// import withApollo from '../lib/withApollo'
-import Head from 'next/head'
-import Link from 'next/link'
-
-import MainLayout from '@/components/MainLayout'
+import MainLayout from '@/components/layouts/MainLayout'
+import IndexLayout from '@/components/layouts/pages/IndexLayout'
 
 
 const IndexPage = () => {
@@ -16,10 +13,9 @@ const IndexPage = () => {
 
   return (
     <MainLayout meta={meta}>
-      
+      <IndexLayout />
     </MainLayout >
   )
 }
 
-// export default withApollo({ ssr: true })(IndexPage)
 export default IndexPage
