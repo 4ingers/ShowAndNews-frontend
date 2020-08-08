@@ -5,8 +5,8 @@
   "main": "_app.js",
   "scripts": {
     "client:start": "next",
-    "server:start": "nodemon ./backend/app",
-    "dev": "env-cmd -f ./backend/.env run-p server:start client:start",
+    "server:start": "env-cmd -f ./backend/.env nodemon ./backend/app",
+    "dev": "run-p server:start client:start",
     "build": "next build",
     "start": "next start"
   },

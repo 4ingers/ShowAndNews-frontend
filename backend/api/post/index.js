@@ -1,158 +1,97 @@
 const db = require('../../database/mysql')
 const { errorHandler } = require('../utils')
 
+
+const queryPosts = db.select(
+  'posts.id',
+  'posts.title',
+  'posts.description',
+  'posts.content',
+  'posts.author_id',
+  'posts.image',
+  'posts.created_at',
+  'posts.updated_at',
+  'categories.name as category',
+  'categories.slug as category_slug',
+  'posts.slug',
+  db.raw('GROUP_CONCAT(tags.name) as tags_name'),
+  db.raw('GROUP_CONCAT(tags.slug) as tags_slug'),
+)
+  .from('posts')
+  .leftJoin('categories', 'posts.category_id', 'categories.id')
+  .leftJoin('post_tags', 'posts.id', 'post_tags.post_id')
+  .leftJoin('tags', 'post_tags.tag_id', 'tags.id')
+  .where({ active: 1 })
+  .groupBy('posts.id')
+
+
 module.exports = {
   getPost: async (id) =>
     await db
-      .select('*')
+      .select()
       .from('posts')
       .where({ id })
       .catch(errorHandler),
 
-  getPostCount: async () => 
+  getPostsByCategoryCount: async (categorySlug) =>
     await db
-      .count('id as count')
+      .count('posts.id as count')
       .from('posts')
-      .where({
-        active: 1,
-      })
+      .leftJoin('categories', 'posts.category_id', 'categories.id')
+      .where({ active: 1 })
+      .andWhere('categories.slug', `${categorySlug}`)
       .first()
       .then(data => data.count)
       .catch(errorHandler),
 
-  getPostBySlug: async (postSlug) => 
-    await db.select(
-      'posts.id',
-      'posts.title',
-      'posts.description',
-      'posts.content',
-      'posts.author_id',
-      'posts.image',
-      'posts.created_at',
-      'posts.updated_at',
-      'categories.id as cat_id',
-      'categories.name as cat_name',
-      'categories.slug as cat_slug',
-      'posts.slug',
-      db.raw('GROUP_CONCAT(tags.name) as tags_names'),
-      db.raw('GROUP_CONCAT(tags.id) as tags_ids')
-    )
-      .from('posts', 'categories')
-      .leftJoin('post_category', 'posts.id', 'post_category.post_id')
-      .leftJoin('categories', 'post_category.category_id', 'categories.id')
-      .leftJoin('post_tags', 'posts.id', 'post_tags.post_id')
-      .leftJoin('tags', 'post_tags.tag_id', 'tags.id')
-      .where({
-        active: 1
-      })
+  getPostBySlug: async (postSlug) =>
+    await queryPosts.clone()
       .andWhereRaw(`MATCH (posts.slug) AGAINST ('${postSlug}')`)
-      .groupBy('posts.id')
       .first()
-      // .then(post => post)
-      .catch(errorHandler)
-  ,
+      .catch(errorHandler),
 
-
-  getPostsByCategory: async (categorySlug, offset, limit) => 
-    await db.select(
-      'posts.id',
-      'posts.title',
-      'posts.description',
-      'posts.content',
-      'posts.author_id',
-      'posts.image',
-      'posts.created_at',
-      'posts.updated_at',
-      'categories.id as cat_id',
-      'categories.name as cat_name',
-      'categories.slug as cat_slug',
-      'posts.slug',
-      db.raw('GROUP_CONCAT(tags.name) as tags_names'),
-      db.raw('GROUP_CONCAT(tags.id) as tags_ids')
-    )
-      .from('posts', 'categories')
-      .leftJoin('post_category', 'posts.id', 'post_category.post_id')
-      .leftJoin('categories', 'post_category.category_id', 'categories.id')
-      .leftJoin('post_tags', 'posts.id', 'post_tags.post_id')
-      .leftJoin('tags', 'post_tags.tag_id', 'tags.id')
-      .where({
-        active: 1,
-      })
-      .andWhere('categories.slug', 'like', `${categorySlug}`)
-      .groupBy('posts.id')
-      .offset(offset)
+  getPostsByCategory: async (categorySlug, offset, limit) =>
+    await queryPosts.clone()
+      .andWhere('categories.slug', `${categorySlug}`)
       .limit(limit)
-      .catch(errorHandler)
-  ,
+      .offset(offset)
+      .catch(errorHandler),
 
-  getPostsByTag: async (tagSlug, offset, limit) => 
-    await db.select(
-      'posts.id',
-      'posts.title',
-      'posts.description',
-      'posts.content',
-      'posts.author_id',
-      'posts.image',
-      'posts.created_at',
-      'posts.updated_at',
-      'categories.id as cat_id',
-      'categories.name as cat_name',
-      'categories.slug as cat_slug',
-      'posts.slug',
-      //! Нет смысла: выводится только искомый
-      db.raw('GROUP_CONCAT(tags.name) as tags_names'),
-      db.raw('GROUP_CONCAT(tags.id) as tags_ids')
-    )
-      .from('posts', 'categories', 'tags')
-      .leftJoin('post_category', 'posts.id', 'post_category.post_id')
-      .leftJoin('categories', 'post_category.category_id', 'categories.id')
-      .leftJoin('post_tags', 'posts.id', 'post_tags.post_id')
-      .leftJoin('tags', 'post_tags.tag_id', 'tags.id')
-      .where({ active: 1 })
-      .andWhereRaw(`MATCH (tags.slug) AGAINST ('${tagSlug}')`)
-      .groupBy('posts.id')
-      .catch(errorHandler)
-  ,
+  getPostsByTag: async (tagSlug, offset, limit) => {
+    const subquery = await db.select('post_id as id')
+    .from('tags')
+    .leftJoin('post_tags', 'tags.id', 'post_tags.tag_id')
+    .whereRaw(`MATCH (tags.slug) AGAINST ('${tagSlug}')`)
 
-  getPostsByType: async (type, limit) => {
-    let query = db.select(
-      'posts.id',
-      'posts.title',
-      'posts.description',
-      'posts.content',
-      'posts.author_id',
-      'posts.image',
-      'posts.created_at',
-      'posts.updated_at',
-      'categories.id as cat_id',
-      'categories.name as cat_name',
-      'categories.slug as cat_slug',
-      'posts.slug',
-      db.raw('GROUP_CONCAT(tags.name) as tags_names'),
-      db.raw('GROUP_CONCAT(tags.id) as tags_ids')
-    )
-      .from('posts', 'categories')
-      .leftJoin('post_category', 'posts.id', 'post_category.post_id')
-      .leftJoin('categories', 'post_category.category_id', 'categories.id')
-      .leftJoin('post_tags', 'posts.id', 'post_tags.post_id')
-      .leftJoin('tags', 'post_tags.tag_id', 'tags.id')
-      .where({ active: 1 })
-      .groupBy('posts.id')
+    const postIds = subquery.map(data => data.id)
 
-    return await {
-      slider: () => query
-        .orderBy('created_at', 'desc')
-        .limit(limit),
-      default: () => query
-    }[type]()
+    return await queryPosts.clone()
+      .andWhere('posts.id', 'in', postIds)
+      .limit(limit)
+      .offset(offset)
       .catch(errorHandler)
   },
 
+  getPostsByType: async (type, limit) => 
+    await {
+      slider: () => queryPosts.clone()
+        .orderBy('created_at', 'desc')
+        .limit(limit),
+      default: () => queryPosts.clone()
+    }[type]()
+      .catch(errorHandler),
 
 
   getPostsAuthors: async (ids) =>
-    await db.select('*')
+    await db.select()
       .from('users')
       .whereIn('id', ids)
-      .catch(errorHandler)
+      .catch(errorHandler),
+
+
+  // getPostIdsByTag: async(tagSlug) =>
+  //   await db.select('post_id')
+  //     .from('tags')
+  //     .whereRaw(`MATCH (tags.slug) AGAINST ('${tagSlug}')`)
+  //     .catch(errorHandler)
 }

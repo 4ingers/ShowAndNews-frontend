@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS {}.posts (
   id INT(12) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  category_id INT(12) NOT NULL,
   
   author_id INT(12) NOT NULL,
   editor_id INT(12) NOT NULL,
@@ -27,11 +28,14 @@ CREATE TABLE IF NOT EXISTS {}.posts (
 
   UNIQUE (slug),
 
+  CONSTRAINT fk_pcategory FOREIGN KEY(category_id)
+    REFERENCES categories(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT fk_pauthor FOREIGN KEY(author_id)
     REFERENCES users(id)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-
   CONSTRAINT fk_peditor FOREIGN KEY(editor_id)
     REFERENCES users(id)
     ON DELETE CASCADE

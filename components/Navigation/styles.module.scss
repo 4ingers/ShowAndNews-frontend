@@ -18,7 +18,8 @@
   top: 0px;
   z-index: 1000;
 
-  border-block-end: $nav-border-inline-size solid;
+  border: 0;
+  border-bottom: $nav-border-inline-size solid;
   border-image: $border-gradient;
 
   .logo {

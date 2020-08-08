@@ -8,7 +8,6 @@ import Footer from '@/components/Footer'
 
 
 const MainLayout = ({ children, meta: { title, keywords, description } }) => {
-
   const [menuActive, setMenuActive] = useState(false)
 
   const toggleMenu = () => setMenuActive(!menuActive)
@@ -22,7 +21,7 @@ const MainLayout = ({ children, meta: { title, keywords, description } }) => {
     </Head>
 
     <div className={classnames(styles.mainLayout)}>
-      <div className={menuActive ? styles.overlayActive : styles.overlay} />
+      <div className={menuActive ? styles.overlayActive : styles.overlay} onClick={toggleMenu}/>
 
       <Navigation menuActive={menuActive} toggleMenu={toggleMenu} />
 

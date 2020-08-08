@@ -102,6 +102,10 @@
 - Подгрузка постов – `offset`, `limit`
 - Полнотекстовый поиск — <https://dba.stackexchange.com/questions/35821/possible-index-on-a-varchar-field-in-mysql>
 
+#### Knex
+
+- Using Higher-Order Functions to Build Queries in Knex.js – <https://spin.atomicobject.com/2017/07/03/knex-queries/>
+
 #### GraphQL
 
 - Структуризация **GraphQL**-кода — <https://www.apollographql.com/blog/how-to-build-graphql-servers-87587591ded5/>

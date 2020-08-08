@@ -25,7 +25,7 @@ const NewsApp = ({ Component, pageProps, apollo }) => (
 
 export default withApollo(({ initialState }) => {
   return new ApolloClient({
-    uri: 'http://localhost:4000/graphql',
+    uri: 'http://192.168.1.35:4000/graphql',
     cache: new InMemoryCache().restore(initialState || {})
   });
 })(NewsApp);

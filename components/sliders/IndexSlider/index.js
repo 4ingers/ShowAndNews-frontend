@@ -6,13 +6,15 @@ import classnames from 'classnames'
 
 
 const SlideCard = ({ post, ...rest }) => {
-  const bgImage = { backgroundImage: `url(/images/${post.image})` }
+  const { title, slug, image  } = post
+  const bgImage = { backgroundImage: `url(/images/${image})` }
+
   return (
     <div {...rest}>
-      <Link href="/post/[slug]" as={`/post/${post.slug}`}>
+      <Link href="/post/[slug]" as={`/post/${slug}`}>
         <a className={classnames(styles.card, styles.overlay)} style={bgImage}>
           <div className={styles.content}>
-            <h2 className={styles.title}>{post.title}</h2>
+            <h2 className={styles.title}>{title}</h2>
           </div>
         </a>
       </Link>
@@ -30,7 +32,7 @@ const AutoPlaySlider = ({ posts, ...rest }) => {
     slidesToScroll: 1,
     cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1)',
     speed: 4000,
-    // autoplay: true,
+    autoplay: true,
     autoplaySpeed: 8000,
     swipeToSlide: true,
     pauseOnHover: true,

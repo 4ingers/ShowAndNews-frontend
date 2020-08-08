@@ -19,7 +19,7 @@ const PostsGrid = ({ posts }) => {
               </Link>
             </figure>
 
-            <TagRow tags={post.tags} />
+            <TagRow tagsName={post.tagsName} tagsSlug={post.tagsSlug} />
 
             <h2>
               {post.title}
@@ -27,7 +27,7 @@ const PostsGrid = ({ posts }) => {
 
             <p className={styles.authorText}>
               <span>
-                {post.created_at}
+                {post.createdAt}
               </span>
             </p>
 

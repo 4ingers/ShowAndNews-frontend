@@ -12,11 +12,11 @@ const GET_RECENT_POSTS = gql`
       description
       content
       image
-      created_at
+      createdAt
       slug
-      # cat_name
-      # cat_slug
-      # tags_names
+      category
+      tagsName
+      tagsSlug
     }
   }
 `

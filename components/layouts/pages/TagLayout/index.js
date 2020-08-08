@@ -3,7 +3,6 @@ import { gql } from 'apollo-boost'
 import { useQuery } from '@apollo/react-hooks'
 
 import styles from './styles.module.scss'
-// import PostsMasonry from '@/components/feed/PostsMasonry'
 
 
 const GET_POSTS = gql`
@@ -13,40 +12,32 @@ const GET_POSTS = gql`
       image
       title
       content
-      created_at
+      createdAt
       category
       description
       author
-      tags
+      tagsName
+      tagsSlug
       slug
     }
   }
 `
 
-
-const TagLayout = ({ slug, offset, limit }) => {
+const TagLayout = ({ slug: tagSlug }) => {
+  const initialOffset = 0
+  const initialLimit = 1000
 
   const { loading, error, data } = useQuery(GET_POSTS, {
     variables: {
-      tagSlug: slug,
-      offset, 
-      limit
+      tagSlug,
+      offset: initialOffset,
+      limit: initialLimit
     }
   });
   if (error) return <h1>Error</h1>
   if (loading) return <h1>Loading...</h1>
 
-  const fetchedPosts = data.getPostsByTag.map(post => ({
-    id: post.id,
-    title: post.title,
-    description: post.description,
-    content: post.content,
-    datetime: post.created_at,
-    category: post.category,
-    tags: post.tags,
-    image: post.image,
-    slug: post.slug
-  }))
+  const fetchedPosts = data.getPostsByTag.map(post => ({ ...post }))
 
   return (
     <pre className={classnames(styles.content)}>

@@ -31,17 +31,19 @@ const Navigation = ({ menuActive, toggleMenu }) => {
   const mobileNavMenuIcon = '/icons/mobile-navigation-menu-icon.png'
   const altMobileNavMenuIcon = getFilenameFromPath(mobileNavMenuIcon, false)
 
+  const scrollToTop = () => {
+    window.scroll({ top: 0, behavior: 'smooth' })
+  }
+
   return (
     <nav className={styles.pageNavigation}>
 
       <div className={styles.topStripe}>
         <span>НОВОСТИ ШОУ-БИЗНЕСА</span>
       </div>
-
       <div className={styles.logoWrapper}>
         <span className={styles.logo}><Logo/></span>
       </div>
-
       <div className={classnames(styles.menuContainer, menuActive && styles.active)}>
         <ul className={styles.menuList}>
           {navMenuCategories.map((item, index) => (
@@ -55,13 +57,11 @@ const Navigation = ({ menuActive, toggleMenu }) => {
           ))}
         </ul>
       </div>
-
       <img className={styles.navIcon}
         src={mobileNavMenuIcon}
         alt={altMobileNavMenuIcon}
         onClick={() => toggleMenu()}
       />
-
     </nav>
   )
 }

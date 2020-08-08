@@ -10,40 +10,42 @@ const getPostsWithAuthors = cb => {
   return async (parent, args, ctx, info) => {
     const posts = await cb(args, parent)
       .catch(errorHandler)
-
     if (!posts.length) return []
 
     const authors = await PostService.getPostsAuthors(
       [...new Set(posts.map(({ author_id }) => author_id))]
     )
-
     const authorMap = authors.reduce((map, author) => {
       map[author.id] = `${author.first_name} ${author.last_name}`
       return map
     }, {})
 
-    return posts.map(({ cat_name, tags_names, author_id, ...rest }, index) => ({
-      tags: tags_names ? tags_names.split(',') : [],
+    return posts.map(({ tags_name, tags_slug, author_id, created_at, updated_at, ...rest }) => ({
+      tagsName: tags_name ? tags_name.split(',') : [],
+      tagsSlug: tags_slug ? tags_slug.split(',') : [],
       author: authorMap[author_id],
-      category: cat_name,
+      createdAt: created_at,
+      updatedAt: updated_at,
       ...rest
     }))
   }
 }
 
+
 const getPost = cb => {
   return async (parent, args, ctx, info) => {
     const post = await cb(args, parent)
       .catch(errorHandler)
-
     if (!post) return null
 
-    const { cat_name, tags_names, author_id, ...rest } = post
+    const { tags_name, tags_slug, author_id, created_at, updated_at, ...rest } = post
 
     return {
-      tags: tags_names ? tags_names.split(',') : [],
+      tagsName: tags_name ? tags_name.split(',') : [],
+      tagsSlug: tags_slug ? tags_slug.split(',') : [],
       author: author_id,
-      category: cat_name,
+      createdAt: created_at,
+      updatedAt: updated_at,
       ...rest
     }
   }
@@ -54,7 +56,7 @@ module.exports = {
   resolvers: {
     DateTime: GraphQLDateTime,
     Query: {
-      getPostCount: (_, __, ___, ____) => PostService.getPostCount(),
+      getPostsByCategoryCount: (_, { catSlug }, ___, ____) => PostService.getPostsByCategoryCount(catSlug),
       getPostBySlug: getPost(
         async ({ postSlug }) => await PostService.getPostBySlug(postSlug)
       ),

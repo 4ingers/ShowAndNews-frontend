@@ -22,7 +22,7 @@ const MasonryPost = ({ post, tagsOnTop }) => {
           <div>
             <h2 className={styles.imageTitle}>{post.title}</h2>
             <span className={styles.imageDate}>
-              {new Date(post.datetime).toUTCString()}
+              {new Date(post.createdAt).toUTCString()}
             </span>
           </div>
         </div>

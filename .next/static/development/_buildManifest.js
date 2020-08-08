@@ -1,1 +1,1 @@
-self.__BUILD_MANIFEST = {"/_error":["static\u002Fchunks\u002Fpages\u002F_error.js"],"/category/[slug]":["static\u002Fchunks\u002Fpages\u002Fcategory\u002F[slug].js"],"/tag/[slug]":["static\u002Fchunks\u002Fpages\u002Ftag\u002F[slug].js"]};self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()
+self.__BUILD_MANIFEST = {"/":["static\u002Fchunks\u002Fpages\u002Findex.js"],"/_error":["static\u002Fchunks\u002Fpages\u002F_error.js"]};self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()

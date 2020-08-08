@@ -12,10 +12,9 @@ const GET_POST = gql`
       description
       content
       image
-      created_at
-      # cat_name
-      # cat_slug
-      # tags_names
+      createdAt
+      tagsName
+      tagsSlug
     }
   }
 `
@@ -29,8 +28,6 @@ const PostLayout = ({ slug }) => {
   })
   if (error) return <h1>Error</h1>
   if (loading) return <h1>Loading...</h1>
-
-  console.log(data.getPostBySlug);
 
   const fetchedPost = data.getPostBySlug
 

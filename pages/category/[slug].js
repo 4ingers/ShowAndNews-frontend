@@ -17,7 +17,7 @@ const CategoryPage = () => {
 
   return (
     <MainLayout meta={meta}>
-      <CategoryLayout slug={slug} />
+      <CategoryLayout slug={slug} key={slug} />
     </MainLayout >
   )
 }
