@@ -5,10 +5,6 @@
 /.pnp
 .pnp.js
 
-# Next.js build output
-.next
-out
-
 # Optional npm cache directory
 .npm
 
