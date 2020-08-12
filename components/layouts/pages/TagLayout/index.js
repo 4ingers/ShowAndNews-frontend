@@ -11,14 +11,18 @@ const GET_POSTS = gql`
       id
       image
       title
-      content
-      createdAt
-      category
       description
-      author
-      tagsName
-      tagsSlug
+      content
+      category {
+        name
+        slug
+      }
+      tags {
+        name
+        slug
+      }
       slug
+      createdAt
     }
   }
 `
@@ -37,7 +41,7 @@ const TagLayout = ({ slug: tagSlug }) => {
   if (error) return <h1>Error</h1>
   if (loading) return <h1>Loading...</h1>
 
-  const fetchedPosts = data.getPostsByTag.map(post => ({ ...post }))
+  const fetchedPosts = data.getPostsByTag
 
   return (
     <pre className={classnames(styles.content)}>

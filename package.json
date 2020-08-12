@@ -4,15 +4,14 @@
   "description": "Show&News Next-Apollo-GraphQL Application",
   "main": "_app.js",
   "scripts": {
-    "client:start": "next",
-    "server:start": "env-cmd -f ./backend/.env nodemon ./backend/app",
-    "dev": "run-p server:start client:start",
+    "dev": "next",
     "build": "next build",
     "start": "next start"
   },
   "author": "Aleksandr Vodyakov <4ingers@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "@apollo/client": "^3.1.3",
     "@apollo/react-hooks": "^4.0.0",
     "@apollo/react-ssr": "^4.0.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
@@ -28,6 +27,7 @@
     "next": "^9.5.0",
     "next-apollo": "^4.0.1",
     "next-with-apollo": "^5.1.0",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-slick": "^0.27.2",

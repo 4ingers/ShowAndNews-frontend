@@ -5,21 +5,20 @@ import { useQuery } from '@apollo/react-hooks'
 import styles from './styles.module.scss'
 import AutoPlaySlider from '@/components/sliders/IndexSlider'
 
-const GET_RECENT_POSTS = gql`
-  query getPostsByType($type: String, $limit: Int) {
-    getPostsByType(type: $type, limit: $limit) {
-      title
-      description
-      content
-      image
-      createdAt
-      slug
-      category
-      tagsName
-      tagsSlug
-    }
-  }
-`
+// const GET_RECENT_POSTS = gql`
+//   query getPostsByType($type: String, $limit: Int) {
+//     getPostsByType(type: $type, limit: $limit) {
+//       image
+//       title
+//       description
+//       category {
+//         name
+//         slug
+//       }
+//       slug
+//     }
+//   }
+// `
 
 
 const IndexLayout = () => {  
@@ -29,8 +28,8 @@ const IndexLayout = () => {
       limit: 3
     }
   })
+  if (!data && loading) return <h1>Loading...</h1>
   if (error) return <h1>Error</h1>
-  if (loading) return <h1>Loading...</h1>
 
   const fetchedPosts = data.getPostsByType
 

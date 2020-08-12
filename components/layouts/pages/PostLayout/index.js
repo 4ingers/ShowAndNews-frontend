@@ -8,13 +8,20 @@ import styles from './styles.module.scss'
 const GET_POST = gql`
   query getPostBySlug($postSlug: String) {
     getPostBySlug(postSlug: $postSlug) {
+      id
+      image
       title
       description
       content
-      image
+      category {
+        name
+        slug
+      }
+      tags {
+        name
+        slug
+      }
       createdAt
-      tagsName
-      tagsSlug
     }
   }
 `

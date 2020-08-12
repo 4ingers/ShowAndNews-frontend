@@ -10,13 +10,16 @@ const categoryColors = {
   'Tag4': 'rgb(100, 100, 100)'
 }
 
-const TagRow = ({ tagsName, tagsSlug }) => {
+const TagRow = ({ tags }) => {
   return (
     <div className={styles.tagsContainer}>
-      {tagsName.map((tag, index) =>
-        <Link href={'/tag/[slug]'} as={`/tag/${tagsSlug[index]}`} key={index}>
-          <a key={index} className={styles.tag} style={{ backgroundColor: categoryColors[tag] }}>
-            {tag.toUpperCase()}
+      {tags.map(({ name, slug }, index) =>
+        <Link href={'/tag/[slug]'} as={`/tag/${slug}`} key={index}>
+          <a key={index}
+            className={styles.tag}
+            style={{ backgroundColor: categoryColors[name] }}
+          >
+            {name.toUpperCase()}
           </a>
         </Link>
       )}

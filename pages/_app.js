@@ -1,7 +1,7 @@
-import withApollo from 'next-with-apollo';
-import Head from 'next/head';
-import { ApolloProvider } from '@apollo/react-hooks'
-import ApolloClient, { InMemoryCache } from 'apollo-boost';
+import { ApolloProvider } from '@apollo/client'
+import { useApollo } from '@/lib/apolloClient'
+
+// import Head from 'next/head';
 // import { ConfigProvider } from 'antd';
 // import ruRU from 'antd/es/locale/ru_RU';
 
@@ -12,20 +12,19 @@ import 'antd/dist/antd.css';
 import '@/styles/base.scss';
 
 
-const NewsApp = ({ Component, pageProps, apollo }) => (
-  <ApolloProvider client={apollo}>
-    {/* <ConfigProvider locale={ruRU}> */}
-    <Head>
-      <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
-    </Head>
-    <Component {...pageProps} />
-    {/* </ConfigProvider> */}
-  </ApolloProvider>
-)
+const NewsApp = ({ Component, pageProps }) => {
+  const apolloClient = useApollo(pageProps.initialApolloState)
 
-export default withApollo(({ initialState }) => {
-  return new ApolloClient({
-    uri: 'http://192.168.1.35:4000/graphql',
-    cache: new InMemoryCache().restore(initialState || {})
-  });
-})(NewsApp);
+  return (
+    <ApolloProvider client={apolloClient}>
+      {/* <ConfigProvider locale={ruRU}> */}
+      {/* <Head>
+      <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    </Head> */}
+      <Component {...pageProps} />
+      {/* </ConfigProvider> */}
+    </ApolloProvider>
+  )
+}
+
+export default NewsApp

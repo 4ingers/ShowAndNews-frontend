@@ -19,7 +19,7 @@ const PostsGrid = ({ posts }) => {
               </Link>
             </figure>
 
-            <TagRow tagsName={post.tagsName} tagsSlug={post.tagsSlug} />
+            <TagRow tags={post.tags} />
 
             <h2>
               {post.title}

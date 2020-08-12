@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { useQuery } from '@apollo/react-hooks'
-import { gql } from 'apollo-boost'
+import { gql, useQuery } from '@apollo/client'
 import { Pagination } from 'antd'
 
 import { useUpdateEffect } from '@/hooks'
@@ -8,44 +7,47 @@ import styles from './styles.module.scss'
 import PostsGrid from '@/components/feed/PostsGrid'
 
 
-const GET_POSTS = gql`
-  query getPostsByCategory($catSlug: String, $offset: Int, $limit: Int) {
-    getPostsByCategoryCount(catSlug: $catSlug)
-    getPostsByCategory(catSlug: $catSlug, offset: $offset, limit: $limit) {
-      id
+export const GET_CATEGORY_POSTS = gql`
+  query getPostsBySectionSlug($section: PostsSectionEnum!, $slug: String!, $offset: Int, $limit: Int) {
+    _getPostsBySectionSlugMeta(section: $section, slug: $slug) {
+      count
+    }
+    getPostsBySectionSlug(section: $section, slug: $slug, offset: $offset, limit: $limit) {
       image
       title
-      content
-      createdAt
-      category
       description
-      author
-      tagsName
-      tagsSlug
+      tags {
+        name
+        slug
+      }
       slug
+      createdAt
     }
   }
 `
 
+export const getCategoryPostsVars = {
+  offset: 0,
+  limit: 9
+}
 
-const CategoryLayout = ({ slug: catSlug }) => {
-  const initialPageSize = 9
-  
-  const [pageSize, setPageSize] = useState(initialPageSize)
+
+const CategoryLayout = ({ slug }) => {  
+  const [pageSize, setPageSize] = useState(getCategoryPostsVars.limit)
   const [current, setCurrent] = useState(1)
   
-  useUpdateEffect(() => {
-    window.scroll({ top: 0, behavior: 'smooth' })
-  }, [current, pageSize])
+  // useUpdateEffect(() => {
+  //   window.scroll({ top: 0, behavior: 'smooth' })
+  // }, [current, pageSize])
   
   const onShowSizeChange = (_, pageSize) => {
     setCurrent(1)
     setPageSize(pageSize)
   }
   
-  const { loading, error, data } = useQuery(GET_POSTS, {
+  const { loading, error, data } = useQuery(GET_CATEGORY_POSTS, {
     variables: {
-      catSlug,
+      slug,
       offset: (current - 1) * pageSize,
       limit: pageSize
     }
