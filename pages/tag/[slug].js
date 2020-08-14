@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 
 import MainLayout from '@/components/layouts/MainLayout'
-import TagLayout from '@/components/layouts/pages/TagLayout'
+import TagLayout from '@/components/layouts/TagLayout'
 
 
 const TagPage = () => {

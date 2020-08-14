@@ -1,4 +1,4 @@
-import useUpdateEffect from './useUpdateEffect'
+import { useUpdateEffect } from './useUpdateEffect'
 
 export {
   useUpdateEffect

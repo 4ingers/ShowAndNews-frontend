@@ -1,5 +1,5 @@
 import MainLayout from '@/components/layouts/MainLayout'
-import IndexLayout from '@/components/layouts/pages/IndexLayout'
+import AutoPlaySlider from '@/components/feed/IndexSlider'
 
 
 const IndexPage = () => {
@@ -13,7 +13,7 @@ const IndexPage = () => {
 
   return (
     <MainLayout meta={meta}>
-      <IndexLayout />
+      <AutoPlaySlider posts={fetchedPosts}/>
     </MainLayout >
   )
 }

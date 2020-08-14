@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 
 import { initializeApollo } from '@/lib/apolloClient'
 import MainLayout from '@/components/layouts/MainLayout'
-import CategoryLayout, { GET_CATEGORY_POSTS, getCategoryPostsVars } from '@/components/layouts/pages/CategoryLayout'
+import CategoryLayout, { GET_CATEGORY_POSTS, getCategoryPostsVars } from '@/components/layouts/CategoryLayout'
 
 
 const CategoryPage = () => {

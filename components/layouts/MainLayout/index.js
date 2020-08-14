@@ -9,9 +9,7 @@ import Footer from '@/components/Footer'
 
 const MainLayout = ({ children, meta: { title, keywords, description } }) => {
   const [menuActive, setMenuActive] = useState(false)
-
   const toggleMenu = () => setMenuActive(!menuActive)
-
 
   return <>
     <Head>
@@ -25,11 +23,11 @@ const MainLayout = ({ children, meta: { title, keywords, description } }) => {
 
       <Navigation menuActive={menuActive} toggleMenu={toggleMenu} />
 
-      <div className={classnames(styles.content, menuActive && styles.inactive)}>
+      <div className={styles.content}>
         {children}
       </div>
 
-      <Footer menuActive={menuActive} />
+      <Footer />
     </div>
   </>
 }

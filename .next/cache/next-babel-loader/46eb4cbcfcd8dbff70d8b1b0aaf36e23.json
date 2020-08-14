@@ -1,1 +1,0 @@
-{"ast":null,"code":"export default ErrorPage = function ErrorPage() {};","map":{"version":3,"sources":["D:/Site/showandnews/pages/404.js"],"names":["ErrorPage"],"mappings":"AAAA,eAAeA,SAAS,GAAG,qBAAM,CAEhC,CAFD","sourcesContent":["export default ErrorPage = () => {\r\n  \r\n}"]},"metadata":{},"sourceType":"module"}
