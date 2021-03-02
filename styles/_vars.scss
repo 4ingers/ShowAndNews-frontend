@@ -1,0 +1,38 @@
+@import "fonts";
+
+// Golden ratio
+$phi: 1.6180339887498948482;
+$small-angle: 360 / ($phi + 1); // 137.5
+$large-angle: 360 - $small-angle; // 222.5
+
+// Colors
+$showandnews-golden: rgb(183, 150, 79);
+$showandnews-burgundy: rgb(144, 26, 45);
+$showandnews-darkgrey: #444;
+
+$bg: #f8f9fa;
+$border: #ccc;
+$border-gradient: linear-gradient(
+    90deg,
+    transparent,
+    $showandnews-golden,
+    transparent
+  )
+  1 0%;
+
+$text-link: #2997ff;
+$text-color: $showandnews-darkgrey;
+$text-light: rgb(189, 189, 189);
+
+$nav-menu-item-color: $showandnews-burgundy;
+$nav-menu-item-color-hover: $showandnews-golden;
+
+$tag-color: #ececec;
+
+// Block element sizes
+// TODO: Check guidelines
+$nav-block-size: 150px;
+$nav-block-size-mobile: 16vw;
+$nav-border-inline-size: 1px;
+
+$footer-block-size: 80px;

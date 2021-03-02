@@ -1,4 +1,5 @@
-@import "variables.scss";
+@import "vars";
+@import 'im';
 
 .mainLayout {
   position: relative;
@@ -9,7 +10,7 @@
   .content {
     flex: 1;
     padding-top: $nav-block-size;
-    height: 100%;
+    // height: 100%;
 
     h1 {
       width: 100%;
@@ -17,17 +18,9 @@
       padding-block: $nav-block-size;
       padding-inline: 0;
     }
-
-    .featured-posts-container {
-      display: flex;
-    }
-
-    .bg-white {
-      background: white;
-    }
   }
 
-  @media screen and (max-width: 900px) {
+  @include media('<=tablet') {
     .content {
       padding-top: $nav-block-size-mobile;
     }
@@ -52,6 +45,5 @@
     @extend .overlay;
     opacity: 0.4;
     visibility: visible;
-
   }
 }

@@ -1,0 +1,18 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.row {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+
+  .postsGrid {
+    margin-block-end: 20px;
+  }
+
+  .pagination {
+    margin: 0 auto;
+  }
+}

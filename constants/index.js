@@ -1,0 +1,2 @@
+export const SECTION_POST_COUNT = 6
+export const INDEX_CATEGORY_POST_COUNT = 3

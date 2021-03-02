@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useState, useEffect } from 'react';
 
 import styles from './styles.module.scss'
-import TagRow from '@/components/feed/TagRow'
+import TagRow from '@/components/TagRow'
 
 const MasonryPost = ({ post, tagsOnTop }) => {
 

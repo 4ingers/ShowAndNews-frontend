@@ -1,43 +1,39 @@
 import classnames from 'classnames'
 import Link from 'next/link'
+import Moment from 'react-moment';
 
 import styles from './styles.module.scss'
-import TagRow from '@/components/feed/TagRow'
+import TagRow from '@/components/TagRow'
 
 
 const PostsGrid = ({ posts }) => {
   return (
     <section className={styles.gridPaginationContainer}>
       <section className={classnames(styles.postGrid, styles.container)}>
-        {posts.map((post, index) => (
-          <div className={styles.postContainer} key={index}>
+        {posts.length && posts.map((post, i) => (
+          <div className={styles.postContainer} key={i}>
             <figure>
               <Link href={`/post/${post.slug}`} >
                 <a>
-                  <img src={`/images/${post.image}`} alt={post.image} />
+                  <img src={post.coverImage.url} alt={post.alternativeText} />
                 </a>
               </Link>
             </figure>
 
-            <TagRow tags={post.tags} />
+            <div className={styles.tags}>
+              <TagRow tags={post.tags} />
+            </div>
 
-            <h2>
-              {post.title}
-            </h2>
+            <h2 className={styles.title}>{post.title}</h2>
 
-            <p className={styles.authorText}>
+            <p className={styles.date}>
               <span>
-                {post.createdAt}
+                <Moment fromNow>
+                  {new Date(post.date).toISOString()}
+                </Moment>
               </span>
             </p>
 
-            <p className={styles.descriptionText}>
-              {post.description}
-            </p>
-
-            <Link href={`post/${post.slug}`}>
-              <a>Подробнее</a>
-            </Link>
           </div>
         ))}
       </section>

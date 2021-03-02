@@ -1,0 +1,17 @@
+@import 'vars';
+
+.tagsContainer {
+  font-size: 12px;
+  
+  .tag {
+    text-decoration: none;
+
+    border: 1px solid $tag-color;
+    color: $showandnews-darkgrey;
+
+    border-radius: 5px;
+    padding: 4px 8px;
+    margin-right: 5px;
+
+  }
+}

@@ -1,4 +1,5 @@
-@import "variables.scss";
+@import 'vars';
+@import 'im';
 
 .pageNavigation {
   block-size: $nav-block-size;
@@ -81,14 +82,14 @@
   }
 }
 
-@media screen and (max-width: 900px) {
+@include media('<=tablet') {
   .pageNavigation {
     width: 100%;
     box-sizing: border-box;
 
     padding-block-end: 0;
-    padding-inline-start: 20px;
-    padding-inline-end: 20px;
+    padding-inline-start: 4%;
+    padding-inline-end: 5%;
 
     // ! inset-block-start doesn't work
     top: 0px;
@@ -101,18 +102,16 @@
 
     .logo {
       // TODO: Относительный/адаптивный
-      font-size: 24px;
+      font-size: 6vw;
 
       display: flex;
       text-align: center;
-      margin-block-end: 2px;
+      margin-block-end: 0.5vw;
     }
 
     .menuContainer {
       inline-size: $inlineSize;
-      block-size: calc(
-        100% - #{$nav-block-size-mobile} - #{$nav-border-inline-size}
-      );
+      block-size: calc(100% - #{$nav-block-size-mobile} - #{$nav-border-inline-size});
       background-color: white;
       position: fixed;
       top: $nav-block-size-mobile;
@@ -120,6 +119,7 @@
       align-items: flex-start;
       justify-content: start;
       left: -$inlineSize;
+      overflow: auto;
 
       &.active {
         left: 0px;
@@ -127,16 +127,19 @@
     }
 
     .menuList {
-      padding: 20px;
+      padding: 10%;
       flex-direction: column;
       justify-content: flex-start;
       align-items: baseline;
       margin: 0;
 
       .menuItem {
-        padding-bottom: 20px;
+        padding-bottom: 3vw;
         &:not(:last-of-type):after {
           display: none;
+        }
+        &Link {
+          font-size: 4vw;
         }
       }
     }
@@ -151,9 +154,5 @@
       block-size: 50%;
       filter: contrast(50%);
     }
-  }
-
-  .logoTitle {
-    margin-block-end: 10px;
   }
 }

@@ -1,4 +1,5 @@
-@import 'variables';
+@import 'vars';
+@import 'im';
 
 .gridPaginationContainer {
   .antdPagination {
@@ -9,10 +10,13 @@
 
 .postGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
   grid-auto-rows: 1fr;
-  padding-bottom: 50px;
+  
+  @include media('<=tablet') {
+    grid-template-columns: 1fr;
+  }
   
   figure {
     height: 100%;
@@ -35,19 +39,20 @@
   .postContainer {
     display: flex;
     flex-direction: column;
-  }
 
-  .authorText {
-    color: $text-light;
-  }
+    .tags {
+      margin: 0;
+      margin-block-end: 5px;
+    }
 
-  a {
-    padding: 0 5px;
-  }
+    .title {
+      margin: 0;
+      margin-block-end: 5px;
+    }
 
-  .descriptionText {
-    font-size: 18px;
-    font-weight: 400px;
-    color: #555;
+    .date {
+      color: $text-light;
+      margin: 0;
+    }
   }
 }

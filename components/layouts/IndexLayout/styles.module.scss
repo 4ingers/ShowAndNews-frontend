@@ -1,0 +1,15 @@
+@import "vars";
+@import 'im';
+
+.pageContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .main {
+    padding: 20px;
+
+    .categoryPosts {
+      margin-block-end: 30px;
+    }
+  }
+}

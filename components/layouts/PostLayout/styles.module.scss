@@ -1,5 +1,84 @@
-@import 'variables';
+@import "vars";
+@import "im";
 
 .container {
-  top: $nav-block-size-mobile;
+  max-width: 900px;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  margin-block-start: 0;
+  margin-block-end: 20px;
+
+  @include media("<=tablet") {
+    top: $nav-block-size-mobile;
+  }
+  @include media(">tablet") {
+    top: $nav-block-size;
+  }
+
+  .header {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-block-end: 30px;
+    padding: 0 20px;
+    
+    @include media("<=tablet") {
+      top: $nav-block-size-mobile;
+    }
+    @include media(">tablet") {
+      top: $nav-block-size;
+    }
+
+    .coverImage {
+      width: 100%;
+    }
+
+    .title {
+      font-size: 32px;
+      margin: 0;
+    }
+
+    .category {
+      font-size: 20px;
+      margin: 0;
+    }
+
+    .date {
+      margin: 0;
+    }
+
+  }
+
+  .postBody {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-block-end: 30px;
+    padding: 0 20px;
+
+    @include media("<=tablet") {
+    }
+
+    h1 {
+      font-size: 24px;
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto;
+
+      @include media("<=tablet") {
+        width: 100%;
+      }
+      @include media(">tablet") {
+        width: 90%;
+      }
+    }
+  }
+
+  .footer {
+    text-align: center;
+  }
 }

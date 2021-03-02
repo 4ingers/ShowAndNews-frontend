@@ -10,7 +10,8 @@
       "@/public/*": ["public/*"],
       "@/services/*": ["services/*"],
       "@/styles/*": ["styles/*"],
-      "@/hooks": ["hooks/"]
+      "@/hooks": ["hooks/"],
+      "@/constants": ["constants/"]
     }
   }
 }
